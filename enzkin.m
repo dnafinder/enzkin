@@ -1,7 +1,7 @@
 function enzkinout=enzkin(S,v)
 % ENZyme KINetics is the study of the chemical reactions that are catalysed by
 % enzymes. In enzyme kinetics the reaction rate is measured and the effects of
-% varying the conditions of the reaction investigated. Studying an enzyme's
+% varying the conditions of the reaction investigated. Studying an enzyme
 % kinetics in this way can reveal the catalytic mechanism of this enzyme, its
 % role in metabolism, how its activity is controlled, and how a drug or a poison
 % might inhibit the enzyme.
@@ -27,7 +27,7 @@ function enzkinout=enzkin(S,v)
 % ENZKIN uses 6 regression models (2 non-linear and 4 linear) to obtain the
 % kinetic parameters.
 %
-% Syntax: 	enzkin(S,v)
+% Syntax: 	enzkinout=enzkin(S,v)
 %      
 %     Inputs:
 %           S - data array of substrate concentrations
