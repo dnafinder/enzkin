@@ -62,14 +62,7 @@ parse(p,S,v)
 assert(length(S)==length(v))
 clear p
 
-if exist('myregr.m','file')==0
-    filename=unzip('https://it.mathworks.com/matlabcentral/mlc-downloads/downloads/submissions/15473/versions/10/download/zip','prova');
-    Index = contains(filename,'myregr.m');
-    current=cd;
-    copyfile(filename{Index},current)
-    rmdir('prova','s')
-    clear filename Index current 
-end
+assert(exist('myregr.m','file')~=0,'You must download myregr function from https://it.mathworks.com/matlabcentral/fileexchange/15473-myregression')
 
 %set the costants
 n=length(S); %number of data
@@ -265,6 +258,13 @@ function disppar(I) %display parameters
 disp(array2table(z,'Rownames',{'Slope' 'Intercept' 'R' 'Km' 'Vmax'},...
     'VariableNames',{'Value','SE','Lower_bound','Upper_bound','p_value'}))
 disp(tr)
+end
+
+function a=struct2array(s)
+% Convert structure to cell
+c = struct2cell(s);
+% Construct an array
+a = [c{:}];
 end
 
 function [out1,out2,out3]=kingraph(I,m,q,stringa) % main plot function
