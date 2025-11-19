@@ -94,7 +94,7 @@ MATLAB
 Curve Fitting Toolbox (for fit, fittype)
 
 The custom regression function myregr by the same author, available at:
-https://it.mathworks.com/matlabcentral/fileexchange/15473-myregression
+https://github.com/dnafinder/myregr
 
 Make sure myregr.m is on your MATLAB path before calling enzkin.
 
