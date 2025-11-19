@@ -1,3 +1,5 @@
+[![Open in MATLAB Online](https://www.mathworks.com/images/responsive/global/open-in-matlab-online.svg)](https://matlab.mathworks.com/open/github/v1?repo=dnafinder/enzkin)
+
 ⚗️ enzkin — Enzyme Kinetics Analysis in MATLAB
 
 enzkin.m is a MATLAB function for estimating Michaelis–Menten kinetic parameters (Km and Vmax) from initial-rate enzyme kinetics data.
