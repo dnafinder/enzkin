@@ -1,55 +1,115 @@
-# enzkin
-ENZyme KINetics is the study of the chemical reactions that are catalysed by enzymes.<br/>
-In enzyme kinetics the reaction rate is measured and the effects of
-varying the conditions of the reaction investigated. Studying an enzyme
-kinetics in this way can reveal the catalytic mechanism of this enzyme, its
-role in metabolism, how its activity is controlled, and how a drug or a poison
-might inhibit the enzyme.
-Michaelis–Menten kinetics approximately describes the kinetics of many
-enzymes. It is named after Leonor Michaelis and Maud Menten. This kinetic
-model is relevant to situations where very simple kinetics can be assumed,
-(i.e. there is no intermediate or product inhibition, and there is no
-allostericity or cooperativity).
-The Michaelis–Menten equation relates the initial reaction rate v0  to the
-substrate concentration S. The corresponding graph is a rectangular
-hyperbolic function; the maximum rate is described as Vmax (asymptote); the
-concentration of substrate where the v0 is the half of Vmax is the
-Michaelis-Menten costant (Km).
-To determine the maximum rate of an enzyme mediated reaction, a series of
-experiments is carried out with varying substrate concentration and the
-initial rate of product formation is measured. 'Initial' here is taken to mean
-that the reaction rate is measured after a relatively short time period,
-during which complex builds up but the substrate concentration remains
-approximately constant and the quasi-steady-state assumption will hold.
-Accurate values for Km and Vmax can only be determined by non-linear
-regression of Michaelis-Menten data.
-The Michaelis-Menten equation can be linearized using several techniques.
-ENZKIN uses 6 regression models (2 non-linear and 4 linear) to obtain the
-kinetic parameters.
+⚗️ enzkin — Enzyme Kinetics Analysis in MATLAB
 
-Syntax: 	enzkinout=enzkin(S,v)
-     
-    Inputs:
-          S - data array of substrate concentrations
-          v - data array of measured initial velocity
-    Outputs:
-          - Vmax and Km estimation by:
-               ° Michaelis-Menten non linear regression
-               ° loglog non linear regression
-               ° Lineweaver-Burk linear regression
-               ° Hanes-Woolf linear regression
-               ° Eadie-Hofstee linear regression
-               ° Scatchard linear regression
-          - for the linear regressions, all regression data are summarized
-          - Plots
+enzkin.m is a MATLAB function for estimating Michaelis–Menten kinetic parameters (Km and Vmax) from initial-rate enzyme kinetics data.
+It combines classical linearized plots (Lineweaver–Burk, Hanes–Woolf, Eadie–Hofstee, Scatchard) with non-linear regression fits to provide a comprehensive view of the enzyme’s kinetic behaviour.
 
-The function requires another function of mine MYREGR. If it is not present on
-the computer, enzkin will try to download it from FEX
+✨ Features
 
-          Created by Giuseppe Cardillo
-          giuseppe.cardillo-edta@poste.it
+Accepts experimental pairs of substrate concentration [S] and initial velocity v
 
-To cite this file, this would be an appropriate format:
-Cardillo G. (2010). Enzkin: a tool to estimate Michaelis-Menten kinetic
-parameters
-http://www.mathworks.com/matlabcentral/fileexchange/26653
+Performs 6 different regression approaches:
+
+Lineweaver–Burk (1/v vs 1/[S])
+
+Hanes–Woolf ([S]/v vs [S])
+
+Eadie–Hofstee (v vs v/[S])
+
+Scatchard (v/[S] vs v)
+
+Logarithmic non-linear Michaelis–Menten fit
+
+Hyperbolic (standard) non-linear Michaelis–Menten fit
+
+Computes Km and Vmax with:
+
+point estimate
+
+standard error
+
+lower and upper confidence bounds
+
+Prints detailed regression summaries to the MATLAB Command Window
+
+Produces a multi-panel figure with:
+
+Michaelis–Menten hyperbolic plot
+
+Lineweaver–Burk plot
+
+Hanes–Woolf plot
+
+log(Michaelis–Menten) plot
+
+Eadie–Hofstee plot
+
+Scatchard plot
+
+🧬 Background
+
+In enzyme kinetics, the Michaelis–Menten model relates the initial rate v to substrate concentration [S] via:
+
+v = (Vmax · [S]) / (Km + [S])
+
+where:
+
+Vmax = maximum rate (asymptote)
+
+Km = Michaelis–Menten constant (substrate concentration at v = Vmax/2)
+
+While accurate parameter estimation should ideally rely on non-linear regression, classical linear transformations (Lineweaver–Burk, Hanes–Woolf, etc.) are still widely used for teaching and for quick diagnostic checks.
+enzkin.m brings both worlds together in a single workflow.
+
+🚀 Usage (MATLAB)
+
+Basic example:
+
+Define substrate concentrations and initial rates as row vectors:
+S = [S₁ S₂ … Sₙ]
+v = [v₁ v₂ … vₙ]
+
+Call the function:
+enzkinout = enzkin(S, v)
+
+Output structure:
+
+enzkinout.KM → 6 × 4 matrix with Km estimates:
+[value, standard error, lower CI, upper CI]
+
+enzkinout.VMAX → 6 × 4 matrix with Vmax estimates:
+in the same order (linearisations + non-linear fits)
+
+The function also prints:
+
+slope, intercept, R, p-values, confidence intervals
+
+summary tables for all 6 methods
+
+And opens a figure window with 6 subplots (Michaelis–Menten and all linearised plots).
+
+📦 Requirements
+
+MATLAB
+
+Curve Fitting Toolbox (for fit, fittype)
+
+The custom regression function myregr by the same author, available at:
+https://it.mathworks.com/matlabcentral/fileexchange/15473-myregression
+
+Make sure myregr.m is on your MATLAB path before calling enzkin.
+
+📚 Citation
+
+If you use this function in teaching, research, or publications, please cite:
+
+Cardillo G. (2010). enzkin.m – A tool to estimate Michaelis–Menten kinetic parameters using multiple linear and non-linear regressions.
+GitHub: https://github.com/dnafinder/enzkin
+
+🔑 License
+
+See the LICENSE file in this repository for licensing details.
+
+👤 Author
+
+Giuseppe Cardillo
+Email: giuseppe.cardillo.75@gmail.com
